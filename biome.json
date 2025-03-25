@@ -1,0 +1,50 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "vcs": {
+    "enabled": true,
+    "defaultBranch": "main",
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "arrowParentheses": "asNeeded",
+      "jsxQuoteStyle": "double",
+      "lineWidth": 160
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noDuplicateFontNames": "off",
+        "noExplicitAny": "off"
+      },
+      "style": {
+        "noUselessElse": "off"
+      },
+      "complexity": {
+        "noUselessSwitchCase": "off",
+        "noForEach": "off"
+      }
+    }
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "ignore": [".vscode/**/*", "node_modules/**/*", "dist/**/*"]
+  }
+}

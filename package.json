@@ -1,0 +1,72 @@
+{
+  "name": "@lanaqi/rsr",
+  "version": "0.0.1-rc.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "react",
+    "router",
+    "security",
+    "react-security",
+    "router-security",
+    "react-security-router",
+    "react-router-security",
+    "guard",
+    "react-guard",
+    "router-guard",
+    "react-router-guard",
+    "react-router",
+    "react-router-dom",
+    "modern-js",
+    "modernjs",
+    "安全",
+    "鉴权",
+    "守护",
+    "认证",
+    "授权",
+    "权限",
+    "安全框架",
+    "路由安全",
+    "认证授权",
+    "路由守护"
+  ],
+  "description": "React 安全路由器",
+  "scripts": {
+    "build": "rslib build",
+    "lint": "biome lint",
+    "check": "biome check",
+    "format": "biome format --write",
+    "release": "npm run build && npm publish"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@rsbuild/plugin-react": "^1.1.1",
+    "@rslib/core": "^0.5.5",
+    "@types/react": "^18.3.19",
+    "@types/react-dom": "^18.3.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.0",
+    "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0",
+    "react-router-dom": "^6.0.0"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
