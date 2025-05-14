@@ -4,7 +4,7 @@ React 安全路由器
 
 # 框架说明
 
-rsr 是 react security router 的简写，一个基于 react router 实现路由级别控制的安全框架。
+rsr 是 react security router 的简写，一个基于 react router 实现纯前端路由级别控制的安全框架。
 
 功能简介：
 
@@ -47,3 +47,8 @@ export default withSecurityBlocker(Root, bundler => {
 });
 
 ```
+
+# 其它例子
+
+基于 Modern.js 的例子：https://github.com/lanaqi-opensource/rsr-demo
+基于 react-router-dom 的例子：https://github.com/lanaqi-opensource/rsr6-demo
