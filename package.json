@@ -1,6 +1,6 @@
 {
   "name": "@lanaqi/rsr",
-  "version": "0.0.1",
+  "version": "0.0.2-dev.1",
   "type": "module",
   "exports": {
     ".": {
@@ -27,6 +27,12 @@
     "react-router-dom",
     "modern-js",
     "modernjs",
+    "auth",
+    "authentication",
+    "authorization",
+    "csr",
+    "rsr",
+    "纯前端",
     "安全",
     "鉴权",
     "守护",
