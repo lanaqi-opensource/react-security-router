@@ -42,7 +42,6 @@ export const useSecurityBlocker = (
   path: AccessPath | undefined;
 } => {
   const { context, manager } = useSecurityContext();
-  const blocker = manager.getBlocker();
   const [path, setPath] = useState<AccessPath | undefined>();
   const [jump, setJump] = useState<boolean>(false);
   const [blocked, setBlocked] = useState<boolean>(false);
@@ -74,6 +73,7 @@ export const useSecurityBlocker = (
     },
     [jump],
   );
+  const blocker = manager.getBlocker();
   useEffect(() => {
     blocker.register(handler);
     return () => {

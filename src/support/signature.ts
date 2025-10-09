@@ -4,10 +4,9 @@ import { useSecurityContext } from '../security';
 
 /**
  * 保存签名钩子
- * @param navigate 是否导航（默认：true）
- * @param redirect 重定向路径（如果不存在原始路径时使用）
+ * @param redirect 重定向路径，当为空字符串时不进行重定向，默认：'/'（如果不存在原始路径时使用）
  */
-export const useSaveSignature = (navigate = true, redirect = '/'): ((path?: AccessPath) => void) => {
+export const useSaveSignature = (redirect = '/'): ((path?: AccessPath) => void) => {
   const { context } = useSecurityContext();
   const recorder = context.getRecorder();
   const storer = context.getStorer();
@@ -22,7 +21,7 @@ export const useSaveSignature = (navigate = true, redirect = '/'): ((path?: Acce
     if (target) {
       storer.saveSignature(recorder, target);
     }
-    if (navigate) {
+    if (redirect !== '') {
       if (target) {
         navigator.navigate(target);
       } else {

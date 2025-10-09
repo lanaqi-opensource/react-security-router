@@ -87,13 +87,9 @@ export const useDeleteAuthorization = (): (() => void) => {
 
 /**
  * 保存认证钩子
- * @param navigate 是否导航
- * @param redirect 重定向路径（如果不存在原始路径时使用）
+ * @param redirect 重定向路径，当为空字符串时不进行重定向，默认：空（如果不存在原始路径时使用）
  */
-export const useSaveAuthentication = <Datasheet>(
-  navigate = false,
-  redirect = '/',
-): ((datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>) => void) => {
+export const useSaveAuthentication = <Datasheet>(redirect = ''): ((datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>) => void) => {
   const { context } = useSecurityContext();
   const recorder = context.getRecorder();
   const storer = context.getStorer();
@@ -102,7 +98,7 @@ export const useSaveAuthentication = <Datasheet>(
     storer.saveAuthentication(recorder, datasheet);
     recorder.clearAccessAuthentication();
     recorder.clearAccessAuthorization();
-    if (navigate) {
+    if (redirect !== '') {
       const path = recorder.getOriginPath();
       if (path) {
         navigator.navigate(path);
@@ -115,13 +111,9 @@ export const useSaveAuthentication = <Datasheet>(
 
 /**
  * 保存授权钩子
- * @param navigate 是否导航
- * @param redirect 重定向路径（如果不存在原始路径时使用）
+ * @param redirect 重定向路径，当为空字符串时不进行重定向，默认：空（如果不存在原始路径时使用）
  */
-export const useSaveAuthorization = <Datasheet>(
-  navigate = false,
-  redirect = '/',
-): ((datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>) => void) => {
+export const useSaveAuthorization = <Datasheet>(redirect = ''): ((datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>) => void) => {
   const { context } = useSecurityContext();
   const recorder = context.getRecorder();
   const storer = context.getStorer();
@@ -129,7 +121,7 @@ export const useSaveAuthorization = <Datasheet>(
   return (datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>) => {
     storer.saveAuthorization(recorder, datasheet);
     recorder.clearAccessAuthorization();
-    if (navigate) {
+    if (redirect !== '') {
       const path = recorder.getOriginPath();
       if (path) {
         navigator.navigate(path);

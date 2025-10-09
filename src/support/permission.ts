@@ -14,10 +14,10 @@ export const useHavePermission = (): ((term: AccessPermission | AccessPermission
     const authorization = obtainAuthorization();
     if (authorization) {
       let permissions: AccessPermissions;
-      if (!Array.isArray(term)) {
-        permissions = [term];
-      } else {
+      if (Array.isArray(term)) {
         permissions = term;
+      } else {
+        permissions = [term];
       }
       have = voter.vote(new Set<AccessPermission>(permissions), authorization.getPermissions());
     }
