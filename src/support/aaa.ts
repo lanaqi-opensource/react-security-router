@@ -8,6 +8,7 @@ export const useObtainAuthentication = (): (() => AccessAuthentication | undefin
   const { context } = useSecurityContext();
   const storer = context.getStorer();
   const recorder = context.getRecorder();
+
   return (): AccessAuthentication | undefined => {
     let authentication = recorder.getAccessAuthentication();
     if (!authentication) {
@@ -16,6 +17,7 @@ export const useObtainAuthentication = (): (() => AccessAuthentication | undefin
         recorder.setAccessAuthentication(authentication);
       }
     }
+
     return authentication;
   };
 };
@@ -28,6 +30,7 @@ export const useObtainAuthorization = (): (() => AccessAuthorization | undefined
   const { context } = useSecurityContext();
   const storer = context.getStorer();
   const recorder = context.getRecorder();
+
   return (): AccessAuthorization | undefined => {
     let authorization = recorder.getAccessAuthorization();
     if (!authorization) {
@@ -37,6 +40,7 @@ export const useObtainAuthorization = (): (() => AccessAuthorization | undefined
         recorder.setAccessAuthorization(authorization);
       }
     }
+
     return authorization;
   };
 };
@@ -48,6 +52,7 @@ export const useDeleteAuthentication = (): (() => void) => {
   const { context } = useSecurityContext();
   const storer = context.getStorer();
   const recorder = context.getRecorder();
+
   return () => {
     storer.deleteAuthentication(recorder);
     storer.deleteAuthorization(recorder);
@@ -72,6 +77,7 @@ export const useDeleteAuthorization = (): (() => void) => {
   const { context } = useSecurityContext();
   const storer = context.getStorer();
   const recorder = context.getRecorder();
+
   return () => {
     storer.deleteAuthorization(recorder);
     recorder.clearAccessAuthorization();
@@ -94,6 +100,7 @@ export const useSaveAuthentication = <Datasheet>(redirect = ''): ((datasheet: Ac
   const recorder = context.getRecorder();
   const storer = context.getStorer();
   const navigator = context.getNavigator();
+
   return (datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>) => {
     storer.saveAuthentication(recorder, datasheet);
     recorder.clearAccessAuthentication();
@@ -118,6 +125,7 @@ export const useSaveAuthorization = <Datasheet>(redirect = ''): ((datasheet: Acc
   const recorder = context.getRecorder();
   const storer = context.getStorer();
   const navigator = context.getNavigator();
+
   return (datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>) => {
     storer.saveAuthorization(recorder, datasheet);
     recorder.clearAccessAuthorization();

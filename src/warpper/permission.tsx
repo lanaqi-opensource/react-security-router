@@ -16,15 +16,14 @@ export type PermissionTerm = PropsWithChildren<{
  * 拥有权限组件
  * @param children 子组件
  * @param term 条件
- * @constructor
  */
 export function HavePermission({ children, term }: PermissionTerm) {
   const havePermission = useHavePermission();
   const have = havePermission(term);
   if (!have) {
-    return <></>;
+    return null;
   } else {
-    return <>{children}</>;
+    return children;
   }
 }
 

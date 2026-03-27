@@ -11,6 +11,7 @@ export const useSaveSignature = (redirect = '/'): ((path?: AccessPath) => void) 
   const recorder = context.getRecorder();
   const storer = context.getStorer();
   const navigator = context.getNavigator();
+
   return (path?: AccessPath) => {
     let target: AccessPath | undefined;
     if (path) {
@@ -38,6 +39,7 @@ export const useDeleteSignature = (): (() => void) => {
   const { context } = useSecurityContext();
   const recorder = context.getRecorder();
   const storer = context.getStorer();
+
   return () => {
     storer.deleteSignature(recorder);
   };
@@ -50,6 +52,7 @@ export const useRemoveSignature = (): ((path: string | AccessPath) => void) => {
   const { context } = useSecurityContext();
   const recorder = context.getRecorder();
   const storer = context.getStorer();
+
   return (path: string | AccessPath) => {
     if (typeof path === 'string') {
       storer.removeSignature(recorder, {
@@ -73,6 +76,7 @@ export const usePurgeSignature = (): void => {
   const recorder = context.getRecorder();
   const storer = context.getStorer();
   const path = recorder.getCurrentPath();
+
   useEffect(() => {
     return () => {
       if (path) {

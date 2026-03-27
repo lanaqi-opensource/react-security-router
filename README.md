@@ -2,6 +2,14 @@
 
 React 安全路由器
 
+## 如何安装
+
+```bash
+
+npm add @lanaqi/rsr -S
+
+```
+
 # 框架说明
 
 rsr 是 react security router 的简写，一个基于 react router 实现纯前端路由级别控制的安全框架。
@@ -13,39 +21,49 @@ rsr 是 react security router 的简写，一个基于 react router 实现纯前
 - 二次签证（签名：如要求再次输入密码等）
 - 等等
 
+注意: 该框架没有编写相关文档，需要自行看源码和例子。
+
 # 版本兼容
 
-注意：目前只兼容 react router v6 & v7 版本，其它的版本，暂时不考虑兼容。
+注意：目前 0.0.3 + 版本只支持 react 19 + ，另外兼容 react router v6 / v7 版本，其它的版本，暂时不考虑兼容。
 
 # 简单例子
 
-``` tsx
-
-export default withSecurityBlocker(Root, bundler => {
-    return bundler
-        .context(builder => {
-            return builder
-                // 可选层级权限
-                // .hierarchy('superadmin>admin;admin>users;users>guest')
-                .resource(rb => rb.patterns('/login', '/logout', '/denied', '/signature').anonymous().build())
-                .resource(rb => rb.patterns('/sheet').permissions('admin').signatured().build())
-                .resource(rb => rb.patterns('/*').authenticated().build())
-                .build();
-        })
-        .manager(builder => {
-            return builder
-                .behave({
-                    notAuthenticationPath: '/login',
-                    notSignaturePath: '/signature',
-                    accessDeniedPath: '/denied',
-                })
-                .build();
-        })
-        // .addons()
-        .build()
-
+```tsx
+export default withSecurityBlocker(Root, (bundler) => {
+  return (
+    bundler
+      .context((builder) => {
+        return (
+          builder
+            // 可选层级权限
+            // .hierarchy('superadmin>admin;admin>users;users>guest')
+            .resource((rb) =>
+              rb
+                .patterns("/login", "/logout", "/denied", "/signature")
+                .anonymous()
+                .build(),
+            )
+            .resource((rb) =>
+              rb.patterns("/sheet").permissions("admin").signatured().build(),
+            )
+            .resource((rb) => rb.patterns("/*").authenticated().build())
+            .build()
+        );
+      })
+      .manager((builder) => {
+        return builder
+          .behave({
+            notAuthenticationPath: "/login",
+            notSignaturePath: "/signature",
+            accessDeniedPath: "/denied",
+          })
+          .build();
+      })
+      // .addons()
+      .build()
+  );
 });
-
 ```
 
 # 其它例子

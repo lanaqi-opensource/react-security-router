@@ -9,6 +9,7 @@ export const useHavePermission = (): ((term: AccessPermission | AccessPermission
   const obtainAuthorization = useObtainAuthorization();
   const { context } = useSecurityContext();
   const voter = context.getVoter();
+
   return (term: AccessPermission | AccessPermissions) => {
     let have = false;
     const authorization = obtainAuthorization();

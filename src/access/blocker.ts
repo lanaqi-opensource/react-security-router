@@ -32,7 +32,7 @@ export interface AccessBlocker {
    * 注销处理器
    * @param handler 处理器
    */
-  unregister(handler: BlockHandler): void;
+  unregister(handler?: BlockHandler): void;
 }
 
 /**
@@ -70,7 +70,7 @@ export class SingleBlocker implements AccessBlocker {
    * 注销处理器
    * @param handler 处理器
    */
-  public unregister(handler: BlockHandler): void {
+  public unregister(handler?: BlockHandler): void {
     this.handler = undefined;
   }
 }
@@ -120,8 +120,10 @@ export class MultiBlocker implements AccessBlocker {
    * 注销处理器
    * @param handler 处理器
    */
-  public unregister(handler: BlockHandler): void {
-    this.handlers.delete(handler);
+  public unregister(handler?: BlockHandler): void {
+    if (handler) {
+      this.handlers.delete(handler);
+    }
   }
 
   /**

@@ -10,12 +10,12 @@ import { type SecurityBundler, SecurityProvider, useSecurityContext } from './pr
  */
 export function SecurityBlocker({ children }: PropsWithChildren) {
   const { context, manager, guarder } = useSecurityContext(); // 获取安全上下文
-  if (manager.isDisabled()) { // 如果管理器设置了禁用
-    return <>{children}</>;
-  }
-  const blocker = useBlocker(({ currentLocation, nextLocation }) => { // 获取阻断器
+
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    // 获取阻断器
     return currentLocation.pathname !== nextLocation.pathname; // 当前位置的路径值不等于下个位置的路径值
   });
+
   const [guarded, setGuarded] = useState<boolean>(false); // 被守护的
   const [nextPath, setNextPath] = useState<AccessPath>(useLocation()); // 下个路径
   const [firstAccess, setFirstAccess] = useState<boolean>(true); // 首次访问
@@ -26,6 +26,7 @@ export function SecurityBlocker({ children }: PropsWithChildren) {
   const [currentDecision, setCurrentDecision] = useState<AccessDecision | undefined>(undefined); // 当前决策
   const [securityBlock, setSecurityBlock] = useState<boolean>(false); // 执行安全阻断
   const [executableBlocked, setExecutableBlocked] = useState<boolean>(true); // 可执行已阻断
+
   useEffect(() => {
     if (blocker.state === 'blocked' && executableBlocked) {
       let isProceed: boolean; // 是否执行处理
@@ -120,7 +121,8 @@ export function SecurityBlocker({ children }: PropsWithChildren) {
             setGuarded(true);
           }
         }
-      } else if (firstAccess) { // 如果是首次访问
+      } else if (firstAccess) {
+        // 如果是首次访问
         // 基于当前路径执行一次
         guarder.guardBefore(nextPath); // 守护之前
         const firstDecision = guarder.guardDecision(nextPath); // 守护决策
@@ -133,14 +135,30 @@ export function SecurityBlocker({ children }: PropsWithChildren) {
       }
     }
   }, [
-    blocker, context, guarder,
-    nextPath, firstAccess, firstHandle, countSignature,
-    handledDecision, beforeDecision, currentDecision, securityBlock, executableBlocked
+    blocker,
+    context,
+    guarder,
+    nextPath,
+    firstAccess,
+    firstHandle,
+    countSignature,
+    handledDecision,
+    beforeDecision,
+    currentDecision,
+    securityBlock,
+    executableBlocked,
   ]);
-  if (!guarded) {
-    return <></>;
+
+  if (manager.isDisabled()) {
+    // 如果管理器设置了禁用
+    return children;
   }
-  return <>{children}</>;
+
+  if (!guarded) {
+    return null;
+  }
+
+  return children;
 }
 
 /**

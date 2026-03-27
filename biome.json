@@ -1,7 +1,11 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
+  "$schema": "https://biomejs.dev/schemas/2.4.9/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "off"
+      }
+    }
   },
   "vcs": {
     "enabled": true,
@@ -35,16 +39,19 @@
         "noExplicitAny": "off"
       },
       "style": {
-        "noUselessElse": "off"
+        "noUselessElse": "off",
+        "useSelfClosingElements": "off"
       },
       "complexity": {
-        "noUselessSwitchCase": "off",
-        "noForEach": "off"
+        "noUselessSwitchCase": "off"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off",
+        "noLabelWithoutControl": "off"
       }
     }
   },
   "files": {
-    "ignoreUnknown": true,
-    "ignore": [".vscode/**/*", "node_modules/**/*", "dist/**/*"]
+    "ignoreUnknown": true
   }
 }

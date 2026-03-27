@@ -9,6 +9,7 @@ import { useSecurityContext } from '../security';
 export const useCustomBlocker = (handler: BlockHandler): void => {
   const { manager } = useSecurityContext();
   const blocker = manager.getBlocker();
+
   useEffect(() => {
     blocker.register(handler);
     return () => {
@@ -45,6 +46,7 @@ export const useSecurityBlocker = (
   const [path, setPath] = useState<AccessPath | undefined>();
   const [jump, setJump] = useState<boolean>(false);
   const [blocked, setBlocked] = useState<boolean>(false);
+
   const proceed = useCallback(() => {
     if (path) {
       setJump(true);
@@ -55,11 +57,13 @@ export const useSecurityBlocker = (
       context.getNavigator().navigate(path);
     }
   }, [context, path, recover]);
+
   const reset = useCallback(() => {
     setPath(undefined);
     setJump(false);
     setBlocked(false);
   }, []);
+
   const handler = useCallback<BlockHandler>(
     (context: AccessContext, currentPath: AccessPath, currentResource: AccessResource | null) => {
       setJump(false);
@@ -73,12 +77,15 @@ export const useSecurityBlocker = (
     },
     [jump],
   );
+
   const blocker = manager.getBlocker();
+
   useEffect(() => {
     blocker.register(handler);
     return () => {
       blocker.unregister(handler);
     };
   }, [blocker, handler]);
+
   return { blocked, proceed, reset, path };
 };

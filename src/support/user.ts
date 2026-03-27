@@ -18,7 +18,7 @@ export const useLogout = (cRedirect = '/', pRedirect = '/'): (() => void) => {
     storer.deleteSignature(recorder);
     recorder.clearAccessAuthentication();
     recorder.clearAccessAuthorization();
-    if (cRedirect !== "") {
+    if (cRedirect !== '') {
       navigator.navigate(cRedirect);
     }
     const parent = context.getParent();
@@ -31,7 +31,7 @@ export const useLogout = (cRedirect = '/', pRedirect = '/'): (() => void) => {
       p_storer.deleteSignature(p_recorder);
       p_recorder.clearAccessAuthentication();
       p_recorder.clearAccessAuthorization();
-      if (pRedirect !== "") {
+      if (pRedirect !== '') {
         p_navigator.navigate(pRedirect);
       }
     }
@@ -52,10 +52,10 @@ export const useLogin = <Datasheet>(cRedirect = '/', pRedirect = '/'): ((datashe
     const isAuthentication = recorder.existAccessAuthentication() || !!storer.loadAuthentication(recorder);
     if (isAuthentication) {
       const e_parent = context.getParent();
-      if (e_parent && (pRedirect !== "")) {
+      if (e_parent && pRedirect !== '') {
         const p_navigator = e_parent.getNavigator();
         p_navigator.navigate(pRedirect);
-      } else if ((cRedirect !== "")) {
+      } else if (cRedirect !== '') {
         const path = recorder.getOriginPath();
         if (path) {
           navigator.navigate(path);
@@ -64,16 +64,16 @@ export const useLogin = <Datasheet>(cRedirect = '/', pRedirect = '/'): ((datashe
         }
       }
     }
-  }, [cRedirect, recorder, storer, navigator]);
+  }, [cRedirect, recorder, storer, navigator, context, pRedirect]);
   return (datasheet: AccessDatasheet<UserDatasheet<Datasheet>>) => {
     storer.saveAuthentication(recorder, datasheet);
     recorder.clearAccessAuthentication();
     recorder.clearAccessAuthorization();
     const r_parent = context.getParent();
-    if (r_parent && (pRedirect !== "")) {
+    if (r_parent && pRedirect !== '') {
       const p_navigator = r_parent.getNavigator();
       p_navigator.navigate(pRedirect);
-    } else if (cRedirect !== "") {
+    } else if (cRedirect !== '') {
       const path = recorder.getOriginPath();
       if (path) {
         navigator.navigate(path);
