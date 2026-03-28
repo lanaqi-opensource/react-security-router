@@ -81,7 +81,9 @@ export class AccessContextBuilder implements AccessBuilder<AccessContext> {
    * 设置记录器
    * @param recorder 记录器
    */
-  public recorder(recorder: AccessRecorder | ((builder: AccessRecorderBuilder) => AccessRecorder)): AccessContextBuilder {
+  public recorder(
+    recorder: AccessRecorder | ((builder: AccessRecorderBuilder) => AccessRecorder),
+  ): AccessContextBuilder {
     if (typeof recorder === 'function') {
       this._recorder = recorder(new AccessRecorderBuilder());
     } else {
@@ -133,7 +135,9 @@ export class AccessContextBuilder implements AccessBuilder<AccessContext> {
    * 设置导航器
    * @param navigator 导航器或导航构建器
    */
-  public navigator(navigator: AccessNavigator | ((builder: AccessNavigatorBuilder) => AccessNavigator)): AccessContextBuilder {
+  public navigator(
+    navigator: AccessNavigator | ((builder: AccessNavigatorBuilder) => AccessNavigator),
+  ): AccessContextBuilder {
     if (typeof navigator === 'function') {
       this._navigator = navigator(new AccessNavigatorBuilder());
     } else {
@@ -183,8 +187,8 @@ export class AccessContextBuilder implements AccessBuilder<AccessContext> {
    * 默认资源集合
    */
   public drs(): AccessContextBuilder {
-    this.resource(rb => rb.patterns('/login', '/logout', '/denied', '/signature').anonymous().build());
-    this.resource(rb => rb.patterns('/*').authenticated().build());
+    this.resource((rb) => rb.patterns('/login', '/logout', '/denied', '/signature').anonymous().build());
+    this.resource((rb) => rb.patterns('/*').authenticated().build());
     return this;
   }
 
@@ -193,12 +197,12 @@ export class AccessContextBuilder implements AccessBuilder<AccessContext> {
    */
   public build(): AccessContext {
     if (!this._recorder) {
-      this.recorder(builder => {
+      this.recorder((builder) => {
         return builder.build();
       });
     }
     if (!this._voter) {
-      this.voter(builder => {
+      this.voter((builder) => {
         if (this._hierarchy) {
           builder.hierarchy(this._hierarchy);
         }
@@ -206,7 +210,7 @@ export class AccessContextBuilder implements AccessBuilder<AccessContext> {
       });
     }
     if (!this._storer) {
-      this.storer(builder => {
+      this.storer((builder) => {
         if (this._validator) {
           builder.authenticationValidator(this._validator);
         }
@@ -217,10 +221,10 @@ export class AccessContextBuilder implements AccessBuilder<AccessContext> {
       if (this._resources.length === 0) {
         this.drs();
       }
-      this.matcher(builder => builder.resources(this._resources).build());
+      this.matcher((builder) => builder.resources(this._resources).build());
     }
     if (!this._navigator) {
-      this.navigator(builder => {
+      this.navigator((builder) => {
         if (this._navigate) {
           builder.navigate(this._navigate);
         }

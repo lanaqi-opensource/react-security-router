@@ -140,7 +140,7 @@ export class SimpleGuarder implements AccessGuarder {
       return AccessDecision.allowAccess;
     }
     // 如果不存在认证或认证未标记已认证则返回
-    if (!authentication || !authentication.isAuthenticated()) {
+    if (!authentication?.isAuthenticated()) {
       // 设置记录器原始路径
       recorder.setOriginPath(blockPath);
       // 返回没有认证
@@ -305,7 +305,7 @@ export class SimpleGuarder implements AccessGuarder {
    */
   public guardBefore(currentPath: AccessPath): void {
     const currentResource = this.obtainResource(currentPath);
-    this.forAddons(addon => {
+    this.forAddons((addon) => {
       addon.guardBefore(this.context, this.manager, currentPath, currentResource);
     });
   }
@@ -317,7 +317,7 @@ export class SimpleGuarder implements AccessGuarder {
    */
   public guardAfter(currentPath: AccessPath, currentDecision: AccessDecision): void {
     const currentResource = this.obtainResource(currentPath);
-    this.forAddons(addon => {
+    this.forAddons((addon) => {
       addon.guardAfter(this.context, this.manager, currentPath, currentResource, currentDecision);
     });
   }
@@ -331,7 +331,7 @@ export class SimpleGuarder implements AccessGuarder {
     const stayResource = this.obtainResource(stayPath);
     const blockResource = this.obtainResource(blockPath);
     this.clearSignature(stayPath, stayResource); // 清理签名
-    this.forAddons(addon => {
+    this.forAddons((addon) => {
       addon.permitBefore(this.context, this.manager, stayPath, blockPath, stayResource, blockResource);
     });
   }
@@ -344,7 +344,7 @@ export class SimpleGuarder implements AccessGuarder {
   public permitAfter(stayPath: AccessPath, blockPath: AccessPath): void {
     const stayResource = this.obtainResource(stayPath);
     const blockResource = this.obtainResource(blockPath);
-    this.forAddons(addon => {
+    this.forAddons((addon) => {
       addon.permitAfter(this.context, this.manager, stayPath, blockPath, stayResource, blockResource);
     });
   }
@@ -421,7 +421,11 @@ export class SimpleGuarder implements AccessGuarder {
    * @param authorization 授权
    * @private
    */
-  private checkSignature(path: AccessPath, authentication: AccessAuthentication, authorization: AccessAuthorization): boolean {
+  private checkSignature(
+    path: AccessPath,
+    authentication: AccessAuthentication,
+    authorization: AccessAuthorization,
+  ): boolean {
     const storer = this.context.getStorer();
     const recorder = this.context.getRecorder();
     return storer.loadSignature(recorder, path, authentication, authorization);

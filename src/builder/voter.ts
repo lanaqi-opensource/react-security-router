@@ -1,4 +1,10 @@
-import { type AccessVoter, HierarchyVoter, OriginRelationResolver, type RelationResolver, SimpleVoter } from '../access';
+import {
+  type AccessVoter,
+  HierarchyVoter,
+  OriginRelationResolver,
+  type RelationResolver,
+  SimpleVoter,
+} from '../access';
 import type { AccessBuilder } from './builder';
 
 /**

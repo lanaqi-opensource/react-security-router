@@ -3,43 +3,45 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "off"
+        "organizeImports": "off",
+        "noDuplicateClasses": "off",
+        "useSortedKeys": "off",
+        "useSortedProperties": "off",
+        "useSortedAttributes": "off",
+        "useSortedInterfaceMembers": "off"
       }
     }
   },
-  "vcs": {
-    "enabled": true,
-    "defaultBranch": "main",
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
   "formatter": {
-    "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120,
+    "lineEnding": "lf"
   },
   "css": {
     "parser": {
-      "cssModules": true
+      "tailwindDirectives": true
     }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "arrowParentheses": "asNeeded",
       "jsxQuoteStyle": "double",
-      "lineWidth": 160
+      "arrowParentheses": "always",
+      "attributePosition": "multiline",
+      "lineWidth": 120
     }
   },
   "linter": {
-    "enabled": true,
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noDuplicateFontNames": "off",
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noDuplicateFontNames": "off"
       },
       "style": {
         "noUselessElse": "off",
+        "noDescendingSpecificity": "off",
         "useSelfClosingElements": "off"
       },
       "complexity": {
@@ -48,10 +50,21 @@
       "a11y": {
         "useKeyWithClickEvents": "off",
         "noLabelWithoutControl": "off"
+      },
+      "correctness": {
+        "noUnusedFunctionParameters": "off"
       }
     }
   },
   "files": {
+    "includes": [
+      "./src/**",
+      "./biome.json",
+      "./package.json",
+      "./postcss.config.mjs",
+      "./rsbuild.config.ts",
+      "./tsconfig.json"
+    ],
     "ignoreUnknown": true
   }
 }

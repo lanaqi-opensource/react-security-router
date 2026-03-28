@@ -1,4 +1,10 @@
-import { type AccessBlocker, type AccessHandler, type AccessManager, type BehaveConfig, SimpleManager } from '../access';
+import {
+  type AccessBlocker,
+  type AccessHandler,
+  type AccessManager,
+  type BehaveConfig,
+  SimpleManager,
+} from '../access';
 import { AccessBlockerBuilder } from './blocker';
 import type { AccessBuilder } from './builder';
 import { AccessHandlerBuilder } from './handler';
@@ -89,7 +95,7 @@ export class AccessManagerBuilder implements AccessBuilder<AccessManager> {
    */
   public build(): AccessManager {
     if (!this._handler) {
-      this.handler(builder => {
+      this.handler((builder) => {
         if (!this._behave) {
           this.dbc();
         }
@@ -97,7 +103,7 @@ export class AccessManagerBuilder implements AccessBuilder<AccessManager> {
       });
     }
     if (!this._blocker) {
-      this.blocker(builder => builder.single().build());
+      this.blocker((builder) => builder.single().build());
     }
     return new SimpleManager(this._disabled ?? false, this._handler as AccessHandler, this._blocker as AccessBlocker);
   }

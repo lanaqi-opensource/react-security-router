@@ -40,14 +40,20 @@ export interface AccessStorer {
    * @param recorder 记录器
    * @param datasheet 数据表
    */
-  saveAuthentication<Datasheet>(recorder: AccessRecorder, datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>): void;
+  saveAuthentication<Datasheet>(
+    recorder: AccessRecorder,
+    datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>,
+  ): void;
 
   /**
    * 加载授权
    * @param recorder 记录器
    * @param authentication 认证 | undefined
    */
-  loadAuthorization(recorder: AccessRecorder, authentication: AccessAuthentication | undefined): AccessAuthorization | undefined;
+  loadAuthorization(
+    recorder: AccessRecorder,
+    authentication: AccessAuthentication | undefined,
+  ): AccessAuthorization | undefined;
 
   /**
    * 删除授权
@@ -60,7 +66,10 @@ export interface AccessStorer {
    * @param recorder 记录器
    * @param datasheet 数据表
    */
-  saveAuthorization<Datasheet>(recorder: AccessRecorder, datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>): void;
+  saveAuthorization<Datasheet>(
+    recorder: AccessRecorder,
+    datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>,
+  ): void;
 
   /**
    * 加载签名
@@ -69,7 +78,12 @@ export interface AccessStorer {
    * @param authentication 认证
    * @param authorization 授权
    */
-  loadSignature(recorder: AccessRecorder, path: AccessPath, authentication: AccessAuthentication, authorization: AccessAuthorization): boolean;
+  loadSignature(
+    recorder: AccessRecorder,
+    path: AccessPath,
+    authentication: AccessAuthentication,
+    authorization: AccessAuthorization,
+  ): boolean;
 
   /**
    * 移除签名
@@ -104,17 +118,17 @@ export class SimpleStorer implements AccessStorer {
   /**
    * 存储健：认证
    */
-  public static readonly KEY_AUTHENTICATION = '__authentication__';
+  public static readonly KEY_AUTHENTICATION = '__aqi_rsr_authentication';
 
   /**
    * 存储健：授权
    */
-  public static readonly KEY_AUTHORIZATION = '__authorization__';
+  public static readonly KEY_AUTHORIZATION = '__aqi_rsr_authorization';
 
   /**
    * 存储健：签名
    */
-  public static readonly KEY_SIGNATURE = '__signature__';
+  public static readonly KEY_SIGNATURE = '__aqi_rsr_signature';
 
   /**
    * 认证与授权存储
@@ -221,7 +235,10 @@ export class SimpleStorer implements AccessStorer {
    * @param recorder 记录器
    * @param datasheet 数据表
    */
-  public saveAuthentication<Datasheet>(recorder: AccessRecorder, datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>): void {
+  public saveAuthentication<Datasheet>(
+    recorder: AccessRecorder,
+    datasheet: AccessDatasheet<AuthenticationDatasheet<Datasheet>>,
+  ): void {
     const ds = datasheet.getDatasheet();
     const authenticationStr = JSON.stringify(ds);
     this.aaaStorage.setItem(this.authenticationKey, authenticationStr);
@@ -232,7 +249,10 @@ export class SimpleStorer implements AccessStorer {
    * @param recorder 记录器
    * @param authentication 认证 | undefined
    */
-  public loadAuthorization(recorder: AccessRecorder, authentication: AccessAuthentication | undefined): AccessAuthorization | undefined {
+  public loadAuthorization(
+    recorder: AccessRecorder,
+    authentication: AccessAuthentication | undefined,
+  ): AccessAuthorization | undefined {
     if (authentication && authentication instanceof SimpleUser) {
       return authentication;
     }
@@ -263,7 +283,10 @@ export class SimpleStorer implements AccessStorer {
    * @param recorder 记录器
    * @param datasheet 数据表
    */
-  public saveAuthorization<Datasheet>(recorder: AccessRecorder, datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>): void {
+  public saveAuthorization<Datasheet>(
+    recorder: AccessRecorder,
+    datasheet: AccessDatasheet<AuthorizationDatasheet<Datasheet>>,
+  ): void {
     const authentication = recorder.getAccessAuthentication();
     if (authentication && authentication instanceof SimpleUser) {
       return;
@@ -280,7 +303,12 @@ export class SimpleStorer implements AccessStorer {
    * @param authentication 认证
    * @param authorization 授权
    */
-  public loadSignature(recorder: AccessRecorder, path: AccessPath, authentication: AccessAuthentication, authorization: AccessAuthorization): boolean {
+  public loadSignature(
+    recorder: AccessRecorder,
+    path: AccessPath,
+    authentication: AccessAuthentication,
+    authorization: AccessAuthorization,
+  ): boolean {
     const signatureStr = this.signStorage.getItem(this.signatureKey);
     if (signatureStr) {
       const signatureList = JSON.parse(signatureStr) as Array<string>;
@@ -301,7 +329,7 @@ export class SimpleStorer implements AccessStorer {
     if (signatureStr) {
       const signatureList = JSON.parse(signatureStr) as Array<string>;
       if (Array.isArray(signatureList)) {
-        const newSignatureList = signatureList.filter(signature => signature !== path.pathname);
+        const newSignatureList = signatureList.filter((signature) => signature !== path.pathname);
         const newSignatureStr = JSON.stringify(newSignatureList);
         this.signStorage.setItem(this.signatureKey, newSignatureStr);
       }

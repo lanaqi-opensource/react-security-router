@@ -123,7 +123,13 @@ export class SimpleContext implements AccessContext {
    * @param matcher 匹配器
    * @param navigator 导航器
    */
-  public constructor(recorder: AccessRecorder, voter: AccessVoter, storer: AccessStorer, matcher: AccessMatcher, navigator: AccessNavigator) {
+  public constructor(
+    recorder: AccessRecorder,
+    voter: AccessVoter,
+    storer: AccessStorer,
+    matcher: AccessMatcher,
+    navigator: AccessNavigator,
+  ) {
     this.recorder = recorder;
     this.voter = voter;
     this.storer = storer;

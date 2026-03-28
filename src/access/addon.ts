@@ -14,7 +14,12 @@ export interface AccessAddon {
    * @param currentPath 当前路径
    * @param currentResource 当前资源
    */
-  guardBefore(context: AccessContext, manager: AccessManager, currentPath: AccessPath, currentResource: AccessResource | null): void;
+  guardBefore(
+    context: AccessContext,
+    manager: AccessManager,
+    currentPath: AccessPath,
+    currentResource: AccessResource | null,
+  ): void;
 
   /**
    * 守护之后
@@ -85,7 +90,12 @@ export abstract class AbstractAddon implements AccessAddon {
    * @param currentPath 当前路径
    * @param currentResource 当前资源
    */
-  public guardBefore(context: AccessContext, manager: AccessManager, currentPath: AccessPath, currentResource: AccessResource | null): void {}
+  public guardBefore(
+    context: AccessContext,
+    manager: AccessManager,
+    currentPath: AccessPath,
+    currentResource: AccessResource | null,
+  ): void {}
 
   /**
    * 守护之后

@@ -1,4 +1,11 @@
-import { AbstractAddon, type AccessContext, type AccessManager, type AccessPath, type AccessResource, HierarchyVoter } from '../access';
+import {
+  AbstractAddon,
+  type AccessContext,
+  type AccessManager,
+  type AccessPath,
+  type AccessResource,
+  HierarchyVoter,
+} from '../access';
 
 /**
  * MicroApp 插件实现
@@ -56,7 +63,12 @@ export class MicroAppAddon extends AbstractAddon {
    * @param currentResource 当前资源
    * @override
    */
-  public guardBefore(context: AccessContext, manager: AccessManager, currentPath: AccessPath, currentResource: AccessResource | null): void {
+  public guardBefore(
+    context: AccessContext,
+    manager: AccessManager,
+    currentPath: AccessPath,
+    currentResource: AccessResource | null,
+  ): void {
     if (this.microJoin) {
       return;
     }

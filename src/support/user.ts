@@ -43,7 +43,10 @@ export const useLogout = (cRedirect = '/', pRedirect = '/'): (() => void) => {
  * @param cRedirect 当前重定向路径，当为空字符串时不进行重定向，默认：'/'（如果不存在原始路径时使用）
  * @param pRedirect 父级重定向路径，当为空字符串时不进行重定向，默认：'/'（如果存在父级时才会生效）
  */
-export const useLogin = <Datasheet>(cRedirect = '/', pRedirect = '/'): ((datasheet: AccessDatasheet<UserDatasheet<Datasheet>>) => void) => {
+export const useLogin = <Datasheet>(
+  cRedirect = '/',
+  pRedirect = '/',
+): ((datasheet: AccessDatasheet<UserDatasheet<Datasheet>>) => void) => {
   const { context } = useSecurityContext();
   const recorder = context.getRecorder();
   const storer = context.getStorer();

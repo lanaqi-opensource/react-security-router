@@ -106,27 +106,27 @@ export class SimpleResource implements AccessResource {
   /**
    * 权限：匿名的
    */
-  public static readonly PERMISSION_ANONYMOUS = '__anonymous__';
+  public static readonly PERMISSION_ANONYMOUS = '__aqi_rsr_anonymous';
 
   /**
    * 权限：已认证
    */
-  public static readonly PERMISSION_AUTHENTICATED = '__authenticated__';
+  public static readonly PERMISSION_AUTHENTICATED = '__aqi_rsr_authenticated';
 
   /**
    * 权限：已授权
    */
-  public static readonly PERMISSION_AUTHORIZED = '__authorized__';
+  public static readonly PERMISSION_AUTHORIZED = '__aqi_rsr_authorized';
 
   /**
    * 标签：已签名
    */
-  public static readonly LABEL_SIGNATURED = '__signatured__';
+  public static readonly LABEL_SIGNATURED = '__aqi_rsr_signatured';
 
   /**
    * 标签：始终签名
    */
-  public static readonly LABEL_ALWAYS_SIGNATURE = '__always_signature__';
+  public static readonly LABEL_ALWAYS_SIGNATURE = '__aqi_rsr_always_signature';
 
   /**
    * 模式集合

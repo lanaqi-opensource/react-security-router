@@ -6,13 +6,11 @@ import { type SecurityBundler, SecurityProvider, useSecurityContext } from './pr
 /**
  * 安全阻断器组件
  * @param children 子组件
- * @constructor
  */
 export function SecurityBlocker({ children }: PropsWithChildren) {
   const { context, manager, guarder } = useSecurityContext(); // 获取安全上下文
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    // 获取阻断器
     return currentLocation.pathname !== nextLocation.pathname; // 当前位置的路径值不等于下个位置的路径值
   });
 

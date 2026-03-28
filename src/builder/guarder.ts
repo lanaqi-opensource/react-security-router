@@ -1,4 +1,10 @@
-import { type AccessAddons, type AccessContext, type AccessManager, type AccessProvider, SimpleGuarder } from '../access';
+import {
+  type AccessAddons,
+  type AccessContext,
+  type AccessManager,
+  type AccessProvider,
+  SimpleGuarder,
+} from '../access';
 import type { NavigateFunction } from '../bridge';
 import type { AccessBuilder } from './builder';
 import { AccessContextBuilder } from './context';
@@ -87,12 +93,12 @@ export class AccessGuarderBuilder implements AccessBuilder<AccessProvider> {
    */
   public build(): AccessProvider {
     if (!this._context) {
-      this.context(builder => {
+      this.context((builder) => {
         return builder.build();
       });
     }
     if (!this._manager) {
-      this.manager(builder => {
+      this.manager((builder) => {
         return builder.build();
       });
     }

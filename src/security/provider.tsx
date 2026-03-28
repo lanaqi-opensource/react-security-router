@@ -38,7 +38,6 @@ export const useSecurityContext = () => {
  * 安全提供者组件
  * @param children 子组件
  * @param bundler 打包器
- * @constructor
  */
 export function SecurityProvider({ children, bundler }: SecurityInstaller) {
   const navigate = useNavigate();

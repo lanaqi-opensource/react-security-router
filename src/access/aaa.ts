@@ -71,7 +71,9 @@ export type UserDatasheet<P = unknown> = P &
 /**
  * 简单认证
  */
-export class SimpleAuthentication<Datasheet> implements AccessAuthentication, AccessDatasheet<AuthenticationDatasheet<Datasheet>> {
+export class SimpleAuthentication<Datasheet>
+  implements AccessAuthentication, AccessDatasheet<AuthenticationDatasheet<Datasheet>>
+{
   /**
    * 数据表
    * @private
@@ -119,7 +121,9 @@ export class SimpleAuthentication<Datasheet> implements AccessAuthentication, Ac
 /**
  * 简单授权
  */
-export class SimpleAuthorization<Datasheet> implements AccessAuthorization, AccessDatasheet<AuthorizationDatasheet<Datasheet>> {
+export class SimpleAuthorization<Datasheet>
+  implements AccessAuthorization, AccessDatasheet<AuthorizationDatasheet<Datasheet>>
+{
   /**
    * 数据表
    * @private
@@ -159,7 +163,9 @@ export class SimpleAuthorization<Datasheet> implements AccessAuthorization, Acce
 /**
  * 简单用户
  */
-export class SimpleUser<Datasheet> implements AccessAuthentication, AccessAuthorization, AccessDatasheet<UserDatasheet<Datasheet>> {
+export class SimpleUser<Datasheet>
+  implements AccessAuthentication, AccessAuthorization, AccessDatasheet<UserDatasheet<Datasheet>>
+{
   /**
    * 数据表
    * @private

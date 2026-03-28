@@ -8,7 +8,11 @@ import type { AccessResource } from './resource';
  * @param currentPath 当前路径
  * @param currentResource 当前资源
  */
-export type BlockHandler = (context: AccessContext, currentPath: AccessPath, currentResource: AccessResource | null) => boolean;
+export type BlockHandler = (
+  context: AccessContext,
+  currentPath: AccessPath,
+  currentResource: AccessResource | null,
+) => boolean;
 
 /**
  * 访问阻断器
