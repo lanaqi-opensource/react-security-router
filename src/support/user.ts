@@ -12,6 +12,7 @@ export const useLogout = (cRedirect = '/', pRedirect = '/'): (() => void) => {
   const recorder = context.getRecorder();
   const storer = context.getStorer();
   const navigator = context.getNavigator();
+
   return () => {
     storer.deleteAuthentication(recorder);
     storer.deleteAuthorization(recorder);
@@ -51,6 +52,7 @@ export const useLogin = <Datasheet>(
   const recorder = context.getRecorder();
   const storer = context.getStorer();
   const navigator = context.getNavigator();
+
   useEffect(() => {
     const isAuthentication = recorder.existAccessAuthentication() || !!storer.loadAuthentication(recorder);
     if (isAuthentication) {
@@ -68,6 +70,7 @@ export const useLogin = <Datasheet>(
       }
     }
   }, [cRedirect, recorder, storer, navigator, context, pRedirect]);
+
   return (datasheet: AccessDatasheet<UserDatasheet<Datasheet>>) => {
     storer.saveAuthentication(recorder, datasheet);
     recorder.clearAccessAuthentication();

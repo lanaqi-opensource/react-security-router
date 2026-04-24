@@ -55,7 +55,7 @@ export function SecurityBlocker({ children }: PropsWithChildren) {
         if (isDiff) {
           guarder.permitBefore(stayPath, blockPath);
         }
-        blocker.proceed(); // 在 v7 版本该逻辑是异步的
+        blocker.proceed();
         if (isDiff) {
           guarder.permitAfter(stayPath, blockPath);
         }

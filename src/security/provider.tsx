@@ -31,6 +31,7 @@ export const useSecurityContext = () => {
   if (!sc) {
     throw new Error('安全上下文为空，必须使用安全提供者包裹组件来设置安全上下文');
   }
+
   return sc;
 };
 
@@ -41,8 +42,10 @@ export const useSecurityContext = () => {
  */
 export function SecurityProvider({ children, bundler }: SecurityInstaller) {
   const navigate = useNavigate();
+
   const provide = useMemo(() => {
     return bundler(new AccessGuarderBuilder().navigate(navigate));
   }, [bundler, navigate]);
+
   return <SecurityContext value={provide}>{children}</SecurityContext>;
 }
