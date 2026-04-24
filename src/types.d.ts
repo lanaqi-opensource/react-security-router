@@ -1,7 +1,7 @@
 declare interface Window {
-  // rsr [micro-app]
-  __RSR_MICRO_APP_PARENT_CONTEXT__: any;
-  __RSR_MICRO_APP_PARENT_MANAGER__: any;
+  // aqi rsr [micro-app]
+  __AQI_RSR_MICRO_APP_PARENT_CONTEXT__: any;
+  __AQI_RSR_MICRO_APP_PARENT_MANAGER__: any;
   // micro-app
   __MICRO_APP_ENVIRONMENT__: boolean | undefined;
   __MICRO_APP_NAME__: string | undefined;

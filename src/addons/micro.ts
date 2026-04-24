@@ -73,8 +73,8 @@ export class MicroAppAddon extends AbstractAddon {
       return;
     }
     if (window.__MICRO_APP_BASE_APPLICATION__) {
-      window.__RSR_MICRO_APP_PARENT_CONTEXT__ = context;
-      window.__RSR_MICRO_APP_PARENT_MANAGER__ = manager;
+      window.__AQI_RSR_MICRO_APP_PARENT_CONTEXT__ = context;
+      window.__AQI_RSR_MICRO_APP_PARENT_MANAGER__ = manager;
     }
     if (window.__MICRO_APP_ENVIRONMENT__) {
       // 设置基础路径
@@ -85,7 +85,7 @@ export class MicroAppAddon extends AbstractAddon {
           matcher.setBasename(baseRoute);
         }
       }
-      const c_parent = window.rawWindow?.__RSR_MICRO_APP_PARENT_CONTEXT__ as AccessContext | undefined;
+      const c_parent = window.rawWindow?.__AQI_RSR_MICRO_APP_PARENT_CONTEXT__ as AccessContext | undefined;
       if (c_parent) {
         // 设置父级
         if (!context.getParent()) {
@@ -109,7 +109,7 @@ export class MicroAppAddon extends AbstractAddon {
           }
         }
       }
-      const m_parent = window.rawWindow?.__RSR_MICRO_APP_PARENT_MANAGER__ as AccessManager | undefined;
+      const m_parent = window.rawWindow?.__AQI_RSR_MICRO_APP_PARENT_MANAGER__ as AccessManager | undefined;
       if (m_parent) {
         // 设置父级
         if (!manager.getParent()) {
