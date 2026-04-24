@@ -70,4 +70,4 @@ export default withSecurityBlocker(Root, (bundler) => {
 
 基于 Modern.js 的例子：https://github.com/lanaqi-opensource/rsr-demo
 
-基于 react-router-dom 的例子：https://github.com/lanaqi-opensource/rsr6-demo
+基于 react-router 的例子：https://github.com/lanaqi-opensource/rsr6-demo
