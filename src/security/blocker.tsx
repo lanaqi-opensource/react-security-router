@@ -12,7 +12,7 @@ export interface SecurityBlockerProps extends React.PropsWithChildren {}
  * 安全阻断器组件
  */
 export function SecurityBlocker({ children }: SecurityBlockerProps) {
-  const { context, manager, guarder } = useSecurityContext(); // 获取安全上下文
+  const { context, guarder } = useSecurityContext(); // 获取安全上下文
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
     return currentLocation.pathname !== nextLocation.pathname; // 当前位置的路径值不等于下个位置的路径值
@@ -150,11 +150,6 @@ export function SecurityBlocker({ children }: SecurityBlockerProps) {
     securityBlock,
     executableBlocked,
   ]);
-
-  if (manager.isDisabled()) {
-    // 如果管理器设置了禁用
-    return children;
-  }
 
   if (!guarded) {
     return null;

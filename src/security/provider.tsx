@@ -30,6 +30,10 @@ export function SecurityProvider({ children, bundler }: SecurityProviderProps) {
     return bundler(new AccessGuarderBuilder().navigate(navigate));
   }, [bundler, navigate]);
 
+  if (provide.manager.isDisabled()) {
+    return children;
+  }
+
   return (
     <SecurityContext value={provide}>
       <SecurityBlocker>{children}</SecurityBlocker>
