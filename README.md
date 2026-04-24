@@ -25,7 +25,7 @@ rsr 是 react security router 的简写，一个基于 react router 实现纯前
 
 # 版本兼容
 
-注意：目前 0.0.3 + 版本只支持 react 19 + ，另外兼容 react router v6 / v7 版本，其它的版本，暂时不考虑兼容。
+注意：目前 0.0.3 + 版本只支持 react 19 + ，另外只兼容 react router v7 版本，其它的版本，暂时不考虑兼容。
 
 # 简单例子
 
