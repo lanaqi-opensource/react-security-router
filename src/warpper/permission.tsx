@@ -1,23 +1,20 @@
-import type { ComponentType, PropsWithChildren } from 'react';
 import type { AccessPermission, AccessPermissions } from '../access';
 import { useHavePermission } from '../support';
 
 /**
- * 权限条件
+ * 拥有权限组件属性
  */
-export type PermissionTerm = PropsWithChildren<{
+export interface HavePermissionProps extends React.PropsWithChildren {
   /**
    * 条件
    */
   readonly term: AccessPermission | AccessPermissions;
-}>;
+}
 
 /**
  * 拥有权限组件
- * @param children 子组件
- * @param term 条件
  */
-export function HavePermission({ children, term }: PermissionTerm) {
+export function HavePermission({ children, term }: HavePermissionProps) {
   const havePermission = useHavePermission();
   const have = havePermission(term);
   if (!have) {
@@ -32,7 +29,7 @@ export function HavePermission({ children, term }: PermissionTerm) {
  * @param Component 组件
  * @param term 条件
  */
-export const withHavePermission = (Component: ComponentType, term: AccessPermission | AccessPermissions) => {
+export const withHavePermission = (Component: React.ComponentType, term: AccessPermission | AccessPermissions) => {
   return () => (
     <HavePermission term={term}>
       <Component />

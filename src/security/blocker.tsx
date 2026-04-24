@@ -1,13 +1,17 @@
-import { type ComponentType, type PropsWithChildren, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AccessBehave, AccessDecision, type AccessPath } from '../access';
 import { useBlocker, useLocation } from '../bridge';
-import { type SecurityBundler, SecurityProvider, useSecurityContext } from './provider';
+import { useSecurityContext } from './context';
+
+/**
+ * 安全阻断器组件属性
+ */
+export interface SecurityBlockerProps extends React.PropsWithChildren {}
 
 /**
  * 安全阻断器组件
- * @param children 子组件
  */
-export function SecurityBlocker({ children }: PropsWithChildren) {
+export function SecurityBlocker({ children }: SecurityBlockerProps) {
   const { context, manager, guarder } = useSecurityContext(); // 获取安全上下文
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
@@ -158,18 +162,3 @@ export function SecurityBlocker({ children }: PropsWithChildren) {
 
   return children;
 }
-
-/**
- * 安全阻断器包装
- * @param Component 组件
- * @param bundler 打包器
- */
-export const withSecurityBlocker = (Component: ComponentType, bundler: SecurityBundler) => {
-  return () => (
-    <SecurityProvider bundler={bundler}>
-      <SecurityBlocker>
-        <Component />
-      </SecurityBlocker>
-    </SecurityProvider>
-  );
-};

@@ -1,7 +1,9 @@
-import { createContext, type PropsWithChildren, use, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { AccessProvider } from '../access';
 import { useNavigate } from '../bridge';
 import { AccessGuarderBuilder } from '../builder';
+import { SecurityContext } from './context';
+import { SecurityBlocker } from './blocker';
 
 /**
  * 安全打包器
@@ -9,43 +11,41 @@ import { AccessGuarderBuilder } from '../builder';
 export type SecurityBundler = (builder: AccessGuarderBuilder) => AccessProvider;
 
 /**
- * 安全安装器
+ * 安全提供者组件属性
  */
-export type SecurityInstaller = PropsWithChildren<{
+export interface SecurityProviderProps extends React.PropsWithChildren {
   /**
    * 打包器
    */
   readonly bundler: SecurityBundler;
-}>;
-
-/**
- * 安全上下文
- */
-export const SecurityContext = createContext<AccessProvider | null>(null);
-
-/**
- * 安全上下文钩子
- */
-export const useSecurityContext = () => {
-  const sc = use(SecurityContext);
-  if (!sc) {
-    throw new Error('安全上下文为空，必须使用安全提供者包裹组件来设置安全上下文');
-  }
-
-  return sc;
-};
+}
 
 /**
  * 安全提供者组件
- * @param children 子组件
- * @param bundler 打包器
  */
-export function SecurityProvider({ children, bundler }: SecurityInstaller) {
+export function SecurityProvider({ children, bundler }: SecurityProviderProps) {
   const navigate = useNavigate();
 
   const provide = useMemo(() => {
     return bundler(new AccessGuarderBuilder().navigate(navigate));
   }, [bundler, navigate]);
 
-  return <SecurityContext value={provide}>{children}</SecurityContext>;
+  return (
+    <SecurityContext value={provide}>
+      <SecurityBlocker>{children}</SecurityBlocker>
+    </SecurityContext>
+  );
 }
+
+/**
+ * 安全阻断器包装
+ * @param Component 组件
+ * @param bundler 打包器
+ */
+export const withSecurityBlocker = (Component: React.ComponentType, bundler: SecurityBundler) => {
+  return () => (
+    <SecurityProvider bundler={bundler}>
+      <Component />
+    </SecurityProvider>
+  );
+};
